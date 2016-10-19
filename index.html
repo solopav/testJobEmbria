@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Тестовая работа в Embria</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- 
+      * Для IE вставляем 2 полифила
+      * dataset - IE 10 и ниже
+      * classList - IE9
+    -->
+    <!--[if IE]>
+      <script src="js/html5-dataset.js"></script>
+      <script src="js/classList.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="field">
+      <div class="points">
+        <div class="points__icon"></div>
+        <div class="points__counter js-points">
+          123
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="actions__item js-actions-item"
+             id="actions_id-145"
+             data-recovery-time="12"
+             data-points="12"
+             data-rest-time="0"
+        >
+          <img class="actions__img"
+               src="imgs/actions/1.png" alt="">
+          <div class="clock js-actions-clock"></div>
+          <div class="actions__timer js-actions-timer"></div>
+        </div>
+        <div class="actions__item js-actions-item"
+             id="actions_id-146"
+             data-recovery-time="7"
+             data-points="5"
+             data-rest-time="0"
+        >
+          <img class="actions__img"
+               src="imgs/actions/2.png" alt="">
+          <div class="clock js-actions-clock"></div>
+          <div class="actions__timer js-actions-timer"></div>
+        </div>
+        <div class="actions__item js-actions-item"
+             id="actions_id-147"
+             data-recovery-time="3"
+             data-points="17"
+             data-rest-time="0"
+        >
+          <img class="actions__img"
+               src="imgs/actions/3.png" alt="">
+          <div class="clock js-actions-clock"></div>
+          <div class="actions__timer js-actions-timer"></div>
+        </div>
+        <div class="actions__item js-actions-item"
+             id="actions_id-148"
+             data-recovery-time="0"
+             data-points="21"
+             data-rest-time="0"
+        >
+          <img class="actions__img"
+               src="imgs/actions/4.png" alt="">
+          <div class="clock js-actions-clock"></div>
+          <div class="actions__timer js-actions-timer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/action.js"></script>
+    <script src="js/currentPoints.js"></script>
+    <script>
+      var actions = document.querySelectorAll('.js-actions-item');
+      var actionsLength = actions.length;
+      var arrAction = [];
+
+      for (var i = 0; i < actionsLength; i++) {
+        (function(i) {
+          arrAction.push(new Action(actions[i]));
+          arrAction[i].checkRestTime();
+
+          actions[i].addEventListener('mousedown',function() {
+            arrAction[i].toggleDisabled();
+          });
+        }(i));
+      }
+
+      var currentPointsElem = document.querySelector('.js-points');
+      var currentPoints = new CurrentPoints(currentPointsElem);
+    </script>
+  </body>
+</html>
